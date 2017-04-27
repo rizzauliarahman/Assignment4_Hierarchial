@@ -24,11 +24,10 @@ def visualizeScatter(attr):
 
     plt.show()
 
-def showDendro(Z, label):
+def showDendro(Z):
     from matplotlib import pyplot as plt
     from scipy.cluster.hierarchy import dendrogram
 
-    plt.xlabel(label)
     dendrogram(Z=Z)
 
     plt.show()

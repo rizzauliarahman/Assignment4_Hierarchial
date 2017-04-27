@@ -8,3 +8,6 @@ class Cluster:
 
     def concat(self, attr):
         np.concatenate((self.attr, attr))
+
+    def getAttr(self):
+        return self.attr
