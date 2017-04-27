@@ -1,7 +1,6 @@
 import numpy as np
 import os
-import plotly.offline as py
-import plotly.figure_factory as ff
+
 
 def column(matrix, i):
     return [row[i] for row in matrix]
@@ -25,9 +24,11 @@ def visualizeScatter(attr):
 
     plt.show()
 
-def showDendro(dist, label):
+def showDendro(Z, label):
     from matplotlib import pyplot as plt
     from scipy.cluster.hierarchy import dendrogram
 
-    dendro = ff.create_dendrogram(dist, labels=label)
-    py.plot(dendro, image='png', image_filename='dendro1')
+    plt.xlabel(label)
+    dendrogram(Z=Z)
+
+    plt.show()
