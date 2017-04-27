@@ -1,5 +1,7 @@
 import numpy as np
 import os
+import plotly.offline as py
+import plotly.figure_factory as ff
 
 def column(matrix, i):
     return [row[i] for row in matrix]
@@ -23,12 +25,9 @@ def visualizeScatter(attr):
 
     plt.show()
 
-def visualizeCentroids(plt, centroids):
-    import colorsys
+def showDendro(dist, label):
+    from matplotlib import pyplot as plt
+    from scipy.cluster.hierarchy import dendrogram
 
-    HSV_tuples = [(x * 1.0 / len(centroids), 0.75, 0.75) for x in range(len(centroids))]
-    RGB_tuples = map(lambda x: colorsys.hsv_to_rgb(*x), HSV_tuples)
-
-    for i in range(len(centroids)):
-        x, y = centroids[i][0], centroids[i][1]
-        plt.scatter(x, y, c = RGB_tuples[i], label = i+1, marker='D', s=50)
+    dendro = ff.create_dendrogram(dist, labels=label)
+    py.plot(dendro, image='png', image_filename='dendro1')

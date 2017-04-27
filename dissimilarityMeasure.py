@@ -1,17 +1,20 @@
 import numpy as np
 import LoadVisualize as load
+from scipy.spatial import distance as d
+
 
 def singleLinkMIN(a, b):
 
-    dist = (a-b)**2
-    dist = np.sum(dist, axis=-1)
-    dist = np.sqrt(dist)
+    dist = np.zeros((len(a), len(b)))
 
-    dist[dist == 0.0] = 1.0
+    for i in range(len(a)):
+        for j in range(len(b)):
+            dist[i][j] = d.euclidean(a[i], b[j])
 
-    xcluster = np.argmin(dist)
-    ycluster = np.argmin(load.column(dist, xcluster))
+    dist[dist == 0] = 1
 
-    return xcluster, ycluster
+    xcluster, ycluster = np.unravel_index(dist.argmin(), dist.shape)
+
+    return np.around(dist[xcluster][ycluster], decimals=2)
 
 
